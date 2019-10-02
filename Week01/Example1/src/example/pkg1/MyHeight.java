@@ -9,17 +9,13 @@ package example.pkg1;
  *
  * @author ngclothier
  */
-public class Example1 {
+public class MyHeight {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        int day = 22;
-        System.out.println("Hello world!");
-        System.out.println("The Date Today Is " + day);
-        System.out.println(true);
-        System.exit(0); 
+        // TODO code application logic here
     }
     
 }
