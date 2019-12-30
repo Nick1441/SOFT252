@@ -4,7 +4,13 @@
  * and open the template in the editor.
  */
 package soft252.Patient;
+import soft252.Doctor.Doctor;
+import soft252.System.ICreateUser;
 import soft252.System.SystemDatabase;
+import static soft252.System.SystemDatabase.Users;
+
+import javax.swing.ButtonGroup;
+import soft252.Other.DoctorFeedback;
 
 /**
  *
@@ -18,9 +24,37 @@ public class DocFeedBack extends javax.swing.JFrame {
     public DocFeedBack() {
         initComponents();
         
+        //CREATING SCALLING RATING
+        ButtonGroup BG = new ButtonGroup();
+        
+        BG.add(rbtnRate1);
+        BG.add(rbtnRate2);
+        BG.add(rbtnRate3);
+        BG.add(rbtnRate4);
+        BG.add(rbtnRate5);
+        
+        //TESTING USERS
+        ICreateUser TestObject = new Patient("Nick","Test1","Plymouth Uni", 21, "Male");
+        ICreateUser TestObject2 = new Doctor("Nathan","Test2","Weymouth College");
+        ICreateUser TestObject3 = new Doctor("Gary","Test3","Weymouth");
+        ICreateUser TestObject4 = new Doctor("Michaela","Test4","Weymouth");
+        
+        SystemDatabase.Users[0] = TestObject;
+        SystemDatabase.Users[1] = TestObject2;
+        SystemDatabase.Users[2] = TestObject3;
+        SystemDatabase.Users[3] = TestObject4;
+        
+        
+        //ADDING DOCTORS TO THE DROP DOWN
+        DocBox.removeAllItems();
+        
         for (int i = 0; i < SystemDatabase.Users.length; i++)
         {
-            DocBox.addItem(SystemDatabase.Users[i].getUserLast());
+            if (SystemDatabase.Users[i].getUserID().substring(0, 1).equals("D"))
+            {
+                String DocName = Users[i].getUserLast();
+                DocBox.addItem(String.format("Dr " + DocName));
+            }
         }
     }
 
@@ -33,12 +67,34 @@ public class DocFeedBack extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnFeedback = new javax.swing.JButton();
         DocBox = new javax.swing.JComboBox<>();
+        lblDocFeedback = new javax.swing.JLabel();
+        lblDocFeedback1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        rbtnRate5 = new javax.swing.JRadioButton();
+        rbtnRate4 = new javax.swing.JRadioButton();
+        rbtnRate3 = new javax.swing.JRadioButton();
+        rbtnRate2 = new javax.swing.JRadioButton();
+        rbtnRate1 = new javax.swing.JRadioButton();
+        lblDocFeedback2 = new javax.swing.JLabel();
+        lblDocFeedback3 = new javax.swing.JLabel();
+        lblDocFeedback4 = new javax.swing.JLabel();
+        lblDocFeedback5 = new javax.swing.JLabel();
+        lblDocFeedback6 = new javax.swing.JLabel();
+        lblDocFeedback7 = new javax.swing.JLabel();
+        txtNotes = new javax.swing.JTextField();
+        lblDocFeedback8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
+        btnFeedback.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        btnFeedback.setText("Submit");
+        btnFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFeedbackActionPerformed(evt);
+            }
+        });
 
         DocBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         DocBox.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -47,27 +103,159 @@ public class DocFeedBack extends javax.swing.JFrame {
             }
         });
 
+        lblDocFeedback.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblDocFeedback.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDocFeedback.setText("Select Doctor");
+
+        lblDocFeedback1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblDocFeedback1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDocFeedback1.setText("Doctor Feedback");
+
+        rbtnRate2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnRate2ActionPerformed(evt);
+            }
+        });
+
+        lblDocFeedback2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblDocFeedback2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDocFeedback2.setText("4");
+
+        lblDocFeedback3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblDocFeedback3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDocFeedback3.setText("1");
+
+        lblDocFeedback4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblDocFeedback4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDocFeedback4.setText("5");
+
+        lblDocFeedback5.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblDocFeedback5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDocFeedback5.setText("2");
+
+        lblDocFeedback6.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblDocFeedback6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDocFeedback6.setText("3");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblDocFeedback3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblDocFeedback5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(rbtnRate1)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbtnRate2)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbtnRate3)
+                    .addComponent(lblDocFeedback6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(rbtnRate4)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbtnRate5))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblDocFeedback2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblDocFeedback4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbtnRate5)
+                    .addComponent(rbtnRate4)
+                    .addComponent(rbtnRate1)
+                    .addComponent(rbtnRate2)
+                    .addComponent(rbtnRate3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblDocFeedback3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblDocFeedback5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblDocFeedback2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblDocFeedback6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblDocFeedback4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        lblDocFeedback7.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblDocFeedback7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDocFeedback7.setText("Notes");
+
+        lblDocFeedback8.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblDocFeedback8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDocFeedback8.setText("Select Rating");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(199, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(128, 128, 128))
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(DocBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblDocFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DocBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFeedback)
+                        .addGap(31, 31, 31))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(116, 116, 116)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblDocFeedback7, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(74, Short.MAX_VALUE))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(173, Short.MAX_VALUE)
+                    .addComponent(lblDocFeedback1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(156, 156, 156)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(20, 20, 20)
+                    .addComponent(lblDocFeedback8, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(360, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(DocBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(jButton1)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDocFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DocBox, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNotes, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                    .addComponent(lblDocFeedback7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(21, 21, 21)
+                    .addComponent(lblDocFeedback1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(250, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(126, 126, 126)
+                    .addComponent(lblDocFeedback8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(145, Short.MAX_VALUE)))
         );
 
         pack();
@@ -76,6 +264,84 @@ public class DocFeedBack extends javax.swing.JFrame {
     private void DocBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DocBoxMouseClicked
            
     }//GEN-LAST:event_DocBoxMouseClicked
+
+    private void btnFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFeedbackActionPerformed
+        //WHEN SUBMIT IS PRESSED. PASSES INFO INTO DOC FEEDBACK CLASS 
+        //WHERE CONSTRUCOR CREATED IT AND ADDS IT INTO THE ARRAY
+        
+        //Finding What Doctor You Have Chosen.
+        int DocNumber = DocBox.getSelectedIndex() + 1;
+        String DocID = "";
+        
+        for (int i = 0; i < SystemDatabase.Users.length; i++)
+        {
+            if (SystemDatabase.Users[i].getUserID().substring(0, 1).equals("D"))
+            {
+                DocNumber--;
+                if (DocNumber == 0)
+                {
+                    DocID = SystemDatabase.Users[i].getUserID();
+                    
+                }
+            }
+        }
+        System.out.println("Doctor ID - " + DocID);
+        
+        //Finding Rating For Doctor
+        int Rate = 0;
+        
+        if (rbtnRate1.isSelected())
+        {
+            Rate = 1;
+        }
+        else if (rbtnRate2.isSelected())
+        {
+            Rate = 2;
+        }
+        else if (rbtnRate3.isSelected())
+        {
+            Rate = 3;
+        }
+        else if (rbtnRate4.isSelected())
+        {
+            Rate = 4;
+        }
+        else if (rbtnRate5.isSelected())     
+        {
+            Rate = 5;
+        }
+        else 
+        {
+            System.out.println("Something Went Wrong.");
+        }
+        
+        System.out.println("Rating -" + Rate + "/5");
+        
+        //Getting Notes From 
+        String Notes;
+        Notes = txtNotes.getText();
+        System.out.println("Notes - " + Notes);
+        
+        //Creating New Doc Feedback Object. Using DocFeedBack Constructor.
+        //All New Feedback Must Be Approved By People Before Being Public.
+        //Need To Make It Find End Of Array, Add One Onto It then Add This into New Slot.
+        DoctorFeedback DocFeed = new DoctorFeedback(DocID, Rate, Notes, "False");
+        SystemDatabase.DocFeed[0] = DocFeed;
+        
+        //Test Info From Doctors Feedback Slot 0.
+        System.out.println("FROM DOC FEEDBACK ARRAY");
+        System.out.println(SystemDatabase.DocFeed[0].getDocID());
+        System.out.println(SystemDatabase.DocFeed[0].getRating());
+        System.out.println(SystemDatabase.DocFeed[0].getNotes());
+        System.out.println(SystemDatabase.DocFeed[0].getApproved());
+        
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFeedbackActionPerformed
+
+    private void rbtnRate2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnRate2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnRate2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,6 +380,22 @@ public class DocFeedBack extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> DocBox;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnFeedback;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblDocFeedback;
+    private javax.swing.JLabel lblDocFeedback1;
+    private javax.swing.JLabel lblDocFeedback2;
+    private javax.swing.JLabel lblDocFeedback3;
+    private javax.swing.JLabel lblDocFeedback4;
+    private javax.swing.JLabel lblDocFeedback5;
+    private javax.swing.JLabel lblDocFeedback6;
+    private javax.swing.JLabel lblDocFeedback7;
+    private javax.swing.JLabel lblDocFeedback8;
+    private javax.swing.JRadioButton rbtnRate1;
+    private javax.swing.JRadioButton rbtnRate2;
+    private javax.swing.JRadioButton rbtnRate3;
+    private javax.swing.JRadioButton rbtnRate4;
+    private javax.swing.JRadioButton rbtnRate5;
+    private javax.swing.JTextField txtNotes;
     // End of variables declaration//GEN-END:variables
 }

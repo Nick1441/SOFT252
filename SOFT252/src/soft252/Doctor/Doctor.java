@@ -5,18 +5,19 @@
  */
 package soft252.Doctor;
 import soft252.System.ICreateUser;
+import soft252.System.SystemDatabase;
 
 /**
  *
  * @author Nick1
  */
 public class Doctor implements ICreateUser{
-     String UserID;
+    String UserID;
     String FirstName;
     String LastName;
     String Address;
     
-    int Number = 0001;
+    int Number = 1;
     
     public Doctor(String First, String Last, String Address)
     {
