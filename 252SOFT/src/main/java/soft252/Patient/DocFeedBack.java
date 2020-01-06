@@ -10,7 +10,12 @@ import soft252.System.SystemDatabase;
 import static soft252.System.SystemDatabase.Users;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JFileChooser;
+import soft252.JSONSaving.JSONRead;
+import soft252.JSONSaving.SavingJSON;
+import soft252.Login;
 import soft252.Other.DoctorFeedback;
+import soft252.System.Startup;
 
 /**
  *
@@ -34,25 +39,25 @@ public class DocFeedBack extends javax.swing.JFrame {
         BG.add(rbtnRate5);
         
         //TESTING USERS
-        ICreateUser TestObject = new Patient("Nick","Test1","Plymouth Uni", 21, "Male");
-        ICreateUser TestObject2 = new Doctor("Nathan","Test2","Weymouth College");
-        ICreateUser TestObject3 = new Doctor("Gary","Test3","Weymouth");
-        ICreateUser TestObject4 = new Doctor("Michaela","Test4","Weymouth");
+//        ICreateUser TestObject = new Patient("Nick","Test1","Plymouth Uni", 21, "Male");
+//        ICreateUser TestObject2 = new Doctor("Nathan","Test2","Weymouth College", 0, "");
+//        ICreateUser TestObject3 = new Doctor("Gary","Test3","Weymouth", 0, "");
+//        ICreateUser TestObject4 = new Doctor("Michaela","Test4","Weymouth", 0, "");
         
-        SystemDatabase.Users[0] = TestObject;
-        SystemDatabase.Users[1] = TestObject2;
-        SystemDatabase.Users[2] = TestObject3;
-        SystemDatabase.Users[3] = TestObject4;
+//        SystemDatabase.Users.add(TestObject);
+//        SystemDatabase.Users[1] = TestObject2;
+//        SystemDatabase.Users[2] = TestObject3;
+//        SystemDatabase.Users[3] = TestObject4;
         
         
         //ADDING DOCTORS TO THE DROP DOWN
         DocBox.removeAllItems();
         
-        for (int i = 0; i < SystemDatabase.Users.length; i++)
+        for (int i = 0; i < SystemDatabase.Users.size(); i++)
         {
-            if (SystemDatabase.Users[i].getUserID().substring(0, 1).equals("D"))
+            if (SystemDatabase.Users.get(i).getUserID().substring(0, 1).equals("D"))
             {
-                String DocName = Users[i].getUserLast();
+                String DocName = Users.get(i).getUserLast();
                 DocBox.addItem(String.format("Dr " + DocName));
             }
         }
@@ -85,6 +90,7 @@ public class DocFeedBack extends javax.swing.JFrame {
         lblDocFeedback7 = new javax.swing.JLabel();
         txtNotes = new javax.swing.JTextField();
         lblDocFeedback8 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -196,6 +202,14 @@ public class DocFeedBack extends javax.swing.JFrame {
         lblDocFeedback8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDocFeedback8.setText("Select Rating");
 
+        btnBack.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -204,22 +218,24 @@ public class DocFeedBack extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblDocFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblDocFeedback7, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DocBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnFeedback)
-                        .addGap(31, 31, 31))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(74, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(116, 116, 116)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnBack))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblDocFeedback7, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblDocFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(74, Short.MAX_VALUE))))
+                                .addComponent(DocBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnFeedback)))
+                        .addGap(31, 31, 31))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(173, Short.MAX_VALUE)
@@ -239,8 +255,10 @@ public class DocFeedBack extends javax.swing.JFrame {
                     .addComponent(lblDocFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DocBox, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNotes, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
@@ -273,14 +291,14 @@ public class DocFeedBack extends javax.swing.JFrame {
         int DocNumber = DocBox.getSelectedIndex() + 1;
         String DocID = "";
         
-        for (int i = 0; i < SystemDatabase.Users.length; i++)
+        for (int i = 0; i < SystemDatabase.Users.size(); i++)
         {
-            if (SystemDatabase.Users[i].getUserID().substring(0, 1).equals("D"))
+            if (SystemDatabase.Users.get(i).getUserID().substring(0, 1).equals("D"))
             {
                 DocNumber--;
                 if (DocNumber == 0)
                 {
-                    DocID = SystemDatabase.Users[i].getUserID();
+                    DocID = SystemDatabase.Users.get(i).getUserID();
                     
                 }
             }
@@ -326,14 +344,32 @@ public class DocFeedBack extends javax.swing.JFrame {
         //All New Feedback Must Be Approved By People Before Being Public.
         //Need To Make It Find End Of Array, Add One Onto It then Add This into New Slot.
         DoctorFeedback DocFeed = new DoctorFeedback(DocID, Rate, Notes, "False");
-        SystemDatabase.DocFeed[0] = DocFeed;
+        SystemDatabase.DocFeed.add(DocFeed);
+        
+        String FileName = "";
+        final JFileChooser Chooser = new JFileChooser();
+        int responce = Chooser.showOpenDialog(DocFeedBack.this);
+        if (responce == JFileChooser.APPROVE_OPTION)
+        {
+            FileName = Chooser.getSelectedFile().toString();
+            JSONRead.Import(FileName);
+            this.setVisible(false);
+            new Login().setVisible(true);
+            //SHOW LOGIN PAGE
+        }
+        else
+        {
+            
+        }
+        SavingJSON.Save(FileName);
+        
         
         //Test Info From Doctors Feedback Slot 0.
-        System.out.println("FROM DOC FEEDBACK ARRAY");
-        System.out.println(SystemDatabase.DocFeed[0].getDocID());
-        System.out.println(SystemDatabase.DocFeed[0].getRating());
-        System.out.println(SystemDatabase.DocFeed[0].getNotes());
-        System.out.println(SystemDatabase.DocFeed[0].getApproved());
+        //System.out.println("FROM DOC FEEDBACK ARRAY");
+//        System.out.println(SystemDatabase.DocFeed[0].getDocID());
+//        System.out.println(SystemDatabase.DocFeed[0].getRating());
+//        System.out.println(SystemDatabase.DocFeed[0].getNotes());
+//        System.out.println(SystemDatabase.DocFeed[0].getApproved());
         
         
         // TODO add your handling code here:
@@ -342,6 +378,12 @@ public class DocFeedBack extends javax.swing.JFrame {
     private void rbtnRate2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnRate2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rbtnRate2ActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+            new DashBoardPatient().setVisible(true);
+            this.setVisible(false);
+            // TODO add your handling code here:
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -380,6 +422,7 @@ public class DocFeedBack extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> DocBox;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnFeedback;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblDocFeedback;

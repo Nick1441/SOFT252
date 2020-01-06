@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package soft252.System;
+import java.util.ArrayList;
 import soft252.Other.DoctorFeedback;
 
 
@@ -12,6 +13,7 @@ import soft252.Other.DoctorFeedback;
  * @author Nick1
  */
 public  class SystemDatabase {
-    public static ICreateUser[] Users = new ICreateUser[4];
-    public static DoctorFeedback[] DocFeed = new DoctorFeedback[1];
+    //public static ICreateUser[] Users2 = new ICreateUser[0];
+    public static ArrayList<ICreateUser> Users = new ArrayList<ICreateUser>(); 
+    public static ArrayList<DoctorFeedback> DocFeed = new ArrayList<DoctorFeedback>();
 }
