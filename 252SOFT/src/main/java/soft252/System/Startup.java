@@ -100,7 +100,7 @@ public class Startup extends javax.swing.JFrame {
             FileName = Chooser.getSelectedFile().toString();
             JSONRead.Import(FileName);
             this.setVisible(false);
-            new Login().setVisible(true);
+            new Login(FileName).setVisible(true);
             //SHOW LOGIN PAGE
         }
         else

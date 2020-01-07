@@ -23,11 +23,12 @@ import soft252.System.Startup;
  */
 public class DocFeedBack extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DocFeedBack
-     */
-    public DocFeedBack() {
+    public static String CurrentID;
+    public static String FileName;
+    public DocFeedBack(String ID, String FileName) {
         initComponents();
+        this.CurrentID = ID;
+        this.FileName = FileName;
         
         //CREATING SCALLING RATING
         ButtonGroup BG = new ButtonGroup();
@@ -343,36 +344,12 @@ public class DocFeedBack extends javax.swing.JFrame {
         //Creating New Doc Feedback Object. Using DocFeedBack Constructor.
         //All New Feedback Must Be Approved By People Before Being Public.
         //Need To Make It Find End Of Array, Add One Onto It then Add This into New Slot.
-        DoctorFeedback DocFeed = new DoctorFeedback(DocID, Rate, Notes, "False");
+        DoctorFeedback DocFeed = new DoctorFeedback(DocID, Rate, Notes, false);
         SystemDatabase.DocFeed.add(DocFeed);
-        
-        String FileName = "";
-        final JFileChooser Chooser = new JFileChooser();
-        int responce = Chooser.showOpenDialog(DocFeedBack.this);
-        if (responce == JFileChooser.APPROVE_OPTION)
-        {
-            FileName = Chooser.getSelectedFile().toString();
-            JSONRead.Import(FileName);
-            this.setVisible(false);
-            new Login().setVisible(true);
-            //SHOW LOGIN PAGE
-        }
-        else
-        {
-            
-        }
         SavingJSON.Save(FileName);
-        
-        
-        //Test Info From Doctors Feedback Slot 0.
-        //System.out.println("FROM DOC FEEDBACK ARRAY");
-//        System.out.println(SystemDatabase.DocFeed[0].getDocID());
-//        System.out.println(SystemDatabase.DocFeed[0].getRating());
-//        System.out.println(SystemDatabase.DocFeed[0].getNotes());
-//        System.out.println(SystemDatabase.DocFeed[0].getApproved());
-        
-        
-        // TODO add your handling code here:
+        //
+        //NOTIFY SECRETARY, NOT APPROVED. THEY CHANGE IT TO APPROVED.
+        //
     }//GEN-LAST:event_btnFeedbackActionPerformed
 
     private void rbtnRate2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnRate2ActionPerformed
@@ -380,7 +357,7 @@ public class DocFeedBack extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtnRate2ActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-            new DashBoardPatient().setVisible(true);
+            new DashBoardPatient(CurrentID, FileName).setVisible(true);
             this.setVisible(false);
             // TODO add your handling code here:
     }//GEN-LAST:event_btnBackActionPerformed
@@ -415,7 +392,7 @@ public class DocFeedBack extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DocFeedBack().setVisible(true);
+                new DocFeedBack(CurrentID, FileName).setVisible(true);
             }
         });
     }

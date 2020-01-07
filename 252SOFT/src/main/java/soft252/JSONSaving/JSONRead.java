@@ -17,6 +17,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import soft252.Admin.Admin;
 import soft252.Doctor.Doctor;
+import soft252.Other.AccountRequest;
+import soft252.Other.Appointment;
+import soft252.Other.DoctorFeedback;
+import soft252.Other.Medicine;
+import soft252.Other.Prescription;
 import soft252.Patient.Patient;
 import soft252.Secretary.Secretary;
 import soft252.System.ICreateUser;
@@ -30,14 +35,14 @@ public class JSONRead {
         
         try
         {
+            //Getting Main Object From JSON.
            JSONObject jsonobj = (JSONObject) parser.parse(new FileReader(File));
             
+           //Getting Users Array From JSON.
            JSONArray UsersArray = (JSONArray) jsonobj.get("Users");
            
            for (int i = 0; i < UsersArray.size(); i++)
-           {
-               //MAKE ARRAY 1 BIGGER.
-                       
+           {        
                JSONObject Current = (JSONObject) UsersArray.get(i);
                String ID = Current.get("UserID").toString();
                String First = Current.get("FirstName").toString();
@@ -66,10 +71,91 @@ public class JSONRead {
                    TestObject = new Secretary(First,Last,Address, Age, Gender, Password, ID);
                }
                
-               //WILL NEED TO RESIZE ARRAY BEFORE ADDING A NEW ONE IN.
-               SystemDatabase.Users.add(i, TestObject);
-               System.out.println(SystemDatabase.Users.get(i).getUserFirst() + SystemDatabase.Users.get(i).getUserID());
+               SystemDatabase.Users.add(TestObject);
            } 
+           
+           //Getting Feedback Array From JSON.
+           JSONArray FeedBackArray = (JSONArray) jsonobj.get("DoctorFeedBack");
+           
+           for (int i = 0; i < FeedBackArray.size(); i++)
+           {
+               JSONObject Current = (JSONObject) FeedBackArray.get(i);
+               String DocID = Current.get("DocID").toString();
+               Integer Rating = (int) (long) Current.get("Rating");
+               String Notes = Current.get("Notes").toString();
+               Boolean Approved = (Boolean) Current.get("Approved");
+               
+               DoctorFeedback DocFeed = new DoctorFeedback(DocID, Rating, Notes, Approved);
+               
+               SystemDatabase.DocFeed.add(DocFeed);
+           }
+           
+           //Getting Patient Account Requests From JSON.
+           JSONArray AccReqArray = (JSONArray) jsonobj.get("AccountRequests");
+           
+           for (int i = 0; i < AccReqArray.size(); i++)
+           {
+               JSONObject Current = (JSONObject) AccReqArray.get(i);
+               String First = Current.get("FirstName").toString();
+               String Last = Current.get("LastName").toString();
+               String Address = Current.get("Address").toString();
+               Integer Age = (int) (long) Current.get("Age");
+               String Gender = Current.get("Gender").toString();
+               String Password = Current.get("Password").toString();
+               
+               AccountRequest AccReq = new AccountRequest(First, Last, Address, Age, Gender, Password);
+               
+               SystemDatabase.AccountReq.add(AccReq);
+           }
+           
+           //Getting Appointments From JSON.
+           JSONArray Appointments = (JSONArray) jsonobj.get("Appointments");
+           
+           for (int i = 0; i < Appointments.size(); i++)
+           {
+               JSONObject Current = (JSONObject) Appointments.get(i);
+               String DocID = Current.get("DocID").toString();
+               String PatientID = Current.get("PatientID").toString();
+               String Dates = Current.get("Dates").toString();
+               Boolean Approved = (Boolean) Current.get("Approved");
+               
+               Appointment App = new Appointment(DocID, PatientID, Dates, Approved);
+               
+               SystemDatabase.Appointments.add(App);
+           }
+           
+           //Getting MedicineMedicine From JSON.
+           JSONArray Medication = (JSONArray) jsonobj.get("Medicine");
+           
+           for (int i = 0; i < Medication.size(); i++)
+           {
+               JSONObject Current = (JSONObject) Medication.get(i);
+               String Name = Current.get("Name").toString();
+               Integer Stock = (int) (long) Current.get("Stock");
+               
+               Medicine Med = new Medicine(Name, Stock);
+               
+               SystemDatabase.Medication.add(Med);
+           }
+           
+           //Getting Prescriptions From JSON.
+           JSONArray Prescriptions = (JSONArray) jsonobj.get("Prescriptions");
+           
+           for (int i = 0; i < Prescriptions.size(); i++)
+           {
+               JSONObject Current = (JSONObject) Prescriptions.get(i);
+               String DocID = Current.get("DocID").toString();
+               String PatientID = Current.get("PatientID").toString();
+               String DoctorNotes = Current.get("DoctorNotes").toString();
+               String MedicationName = Current.get("MedicationName").toString();
+               Integer Quantity =   (int) (long) Current.get("Quantity");
+               String Dosage = Current.get("Dosage").toString();
+               Boolean Completed = (Boolean) Current.get("Completed");
+               
+               Prescription Pre = new Prescription(DocID, PatientID, DoctorNotes, MedicationName, Quantity, Dosage, Completed);
+               
+               SystemDatabase.Prescriptions.add(Pre);
+           }
         }
         catch(FileNotFoundException e)
         {

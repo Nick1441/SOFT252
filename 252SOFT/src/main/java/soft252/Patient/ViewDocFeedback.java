@@ -13,13 +13,13 @@ import static soft252.System.SystemDatabase.Users;
  * @author Nick1
  */
 public class ViewDocFeedback extends javax.swing.JFrame {
-
-    /**
-     * Creates new form ViewDocFeedback
-     */
-    public ViewDocFeedback() {
+    
+    public static String CurrentID;
+    public static String FileName;
+    public ViewDocFeedback(String ID, String FileName) {
         initComponents();
-        
+        this.CurrentID = ID;
+        this.FileName = FileName;
         DocBox.removeAllItems();
         
         for (int i = 0; i < SystemDatabase.Users.size(); i++)
@@ -31,7 +31,7 @@ public class ViewDocFeedback extends javax.swing.JFrame {
             }
         }
         
-        DocBox.setSelectedItem(null);
+        //DocBox.setSelectedItem(null);
     }
 
     /**
@@ -52,6 +52,12 @@ public class ViewDocFeedback extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         DocBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        DocBox.setSelectedIndex(-1);
+        DocBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                DocBoxItemStateChanged(evt);
+            }
+        });
         DocBox.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DocBoxMouseClicked(evt);
@@ -108,6 +114,52 @@ public class ViewDocFeedback extends javax.swing.JFrame {
 
     private void DocBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DocBoxMouseClicked
        
+//        int DocNumber = DocBox.getSelectedIndex() + 1;
+//        String DocID = "";
+//        String DocLast = "";
+//        
+//        for (int i = 0; i < SystemDatabase.Users.size(); i++)
+//        {
+//            if (SystemDatabase.Users.get(i).getUserID().substring(0, 1).equals("D"))
+//            {
+//                DocNumber--;
+//                if (DocNumber == 0)
+//                {
+//                    DocID = SystemDatabase.Users.get(i).getUserID();
+//                    DocLast = SystemDatabase.Users.get(i).getUserLast();
+//                    
+//                }
+//            }
+//        }
+//        
+//        System.out.println(DocID);
+//        
+//        for (int i = 0; i < SystemDatabase.DocFeed.size(); i++)
+//        {
+//            if (SystemDatabase.DocFeed.get(i).getDocID().equals(DocID))
+//            {
+//                 //&& SystemDatabase.DocFeed.get(i).getApproved().equals(false)
+//                Integer Rating = SystemDatabase.DocFeed.get(i).getRating();
+//                txtAreaFeedback.append("Dr "+ DocLast + " - " +SystemDatabase.DocFeed.get(i).getDocID() + "\n");
+//                txtAreaFeedback.append("Rating - " + Rating.toString() + "/5" + "\n");
+//                txtAreaFeedback.append("Notes - " + SystemDatabase.DocFeed.get(i).getNotes() + "\n");
+//                txtAreaFeedback.append("\n");
+//                
+//            }
+//            System.out.println(SystemDatabase.DocFeed.get(i).getDocID());
+//        }
+        
+        
+    }//GEN-LAST:event_DocBoxMouseClicked
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        new DashBoardPatient(CurrentID, FileName).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void DocBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DocBoxItemStateChanged
+        
+        txtAreaFeedback.setText(null);
         int DocNumber = DocBox.getSelectedIndex() + 1;
         String DocID = "";
         String DocLast = "";
@@ -130,9 +182,8 @@ public class ViewDocFeedback extends javax.swing.JFrame {
         
         for (int i = 0; i < SystemDatabase.DocFeed.size(); i++)
         {
-            if (SystemDatabase.DocFeed.get(i).getDocID().equals(DocID))
+            if (SystemDatabase.DocFeed.get(i).getDocID().equals(DocID) && SystemDatabase.DocFeed.get(i).getApproved().equals(true))
             {
-                 //&& SystemDatabase.DocFeed.get(i).getApproved().equals(false)
                 Integer Rating = SystemDatabase.DocFeed.get(i).getRating();
                 txtAreaFeedback.append("Dr "+ DocLast + " - " +SystemDatabase.DocFeed.get(i).getDocID() + "\n");
                 txtAreaFeedback.append("Rating - " + Rating.toString() + "/5" + "\n");
@@ -142,14 +193,7 @@ public class ViewDocFeedback extends javax.swing.JFrame {
             }
             System.out.println(SystemDatabase.DocFeed.get(i).getDocID());
         }
-        
-        
-    }//GEN-LAST:event_DocBoxMouseClicked
-
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        new DashBoardPatient().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnBackActionPerformed
+    }//GEN-LAST:event_DocBoxItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -181,7 +225,7 @@ public class ViewDocFeedback extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewDocFeedback().setVisible(true);
+                new ViewDocFeedback(CurrentID, FileName).setVisible(true);
             }
         });
     }

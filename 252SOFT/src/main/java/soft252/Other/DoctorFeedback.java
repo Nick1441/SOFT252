@@ -13,9 +13,9 @@ public class DoctorFeedback {
     String DoctorID;
     int Rating;
     String Notes;
-    String Approved;
+    Boolean Approved;
     
-    public DoctorFeedback(String DocID, int Rate, String Notes, String Approved)
+    public DoctorFeedback(String DocID, int Rate, String Notes, Boolean Approved)
     {
         this.DoctorID = DocID;
         this.Rating = Rate;
@@ -38,8 +38,26 @@ public class DoctorFeedback {
         return Notes;
     }
     
-    public String getApproved()
+    public Boolean getApproved()
     {
         return Approved;
     }
+
+    public void setDoctorID(String DoctorID) {
+        this.DoctorID = DoctorID;
+    }
+
+    public void setRating(int Rating) {
+        this.Rating = Rating;
+    }
+
+    public void setNotes(String Notes) {
+        this.Notes = Notes;
+    }
+
+    public void setApproved(Boolean Approved) {
+        this.Approved = Approved;
+    }
+    
+    
 }

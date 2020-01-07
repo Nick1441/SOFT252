@@ -5,7 +5,9 @@
  */
 package soft252;
 
+import soft252.Admin.DashBoardAdmin;
 import soft252.Patient.DashBoardPatient;
+import soft252.Patient.RequestAccount;
 import soft252.System.SystemDatabase;
 
 /**
@@ -17,8 +19,11 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    public Login() {
+    public static String FileName;
+    
+    public Login(String FileName) {
         initComponents();
+        this.FileName = FileName;
         txtIncorrect.setVisible(false);
     }
 
@@ -35,6 +40,7 @@ public class Login extends javax.swing.JFrame {
         txtPassword = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         txtIncorrect = new javax.swing.JLabel();
+        btnReqAccount = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,16 +65,17 @@ public class Login extends javax.swing.JFrame {
 
         txtIncorrect.setText("Incorrect Password/Username");
 
+        btnReqAccount.setText("Request Account");
+        btnReqAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReqAccountActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(78, 78, 78))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -78,6 +85,14 @@ public class Login extends javax.swing.JFrame {
                         .addGap(134, 134, 134)
                         .addComponent(txtIncorrect)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnReqAccount)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +105,9 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLogin)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addComponent(btnReqAccount)
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -130,7 +147,7 @@ public class Login extends javax.swing.JFrame {
         if (Password.equals(Attempt) && ID.equals(txtUserName.getText()))
         {
             System.out.println("LOGGED IN");
-            RankChecker(Number);
+            RankChecker(Number, ID);
             //Call Method to Find What Roll They Are. E.g. Patient or Doctor etc.
         }
         else
@@ -139,14 +156,19 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    public void RankChecker(Integer User)
+    private void btnReqAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReqAccountActionPerformed
+        new RequestAccount(FileName).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnReqAccountActionPerformed
+
+    public void RankChecker(Integer User, String ID)
     {
         String Rank = SystemDatabase.Users.get(User).getUserID().substring(0, 1);
         if (Rank.equals("P"))
         {
             //Open Patient DashBoard.
-            this.setVisible(false);
-            new DashBoardPatient().setVisible(true);
+            new DashBoardPatient(ID, FileName).setVisible(true);
+            this.dispose();
         }
         else if (Rank.equals("D"))
         {
@@ -155,10 +177,13 @@ public class Login extends javax.swing.JFrame {
         else if (Rank.equals("A"))
         {
             //Open Admin DashBoard.
+            new DashBoardAdmin(ID, FileName).setVisible(true);
+            this.dispose();
         }
         else if (Rank.equals("S"))
         {
             //Open Secretary DashBoard.
+            
         }
     }
     /**
@@ -191,13 +216,14 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new Login(FileName).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnReqAccount;
     private javax.swing.JLabel txtIncorrect;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUserName;

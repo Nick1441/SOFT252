@@ -5,17 +5,25 @@
  */
 package soft252.Patient;
 
+import javax.swing.JFileChooser;
+import soft252.JSONSaving.JSONRead;
+import soft252.JSONSaving.SavingJSON;
+import soft252.Login;
+
 /**
  *
  * @author Nick1
  */
 public class DashBoardPatient extends javax.swing.JFrame {
-
+    public static String CurrentID = "";
+    public static String FileName;
     /**
      * Creates new form DashBoard
      */
-    public DashBoardPatient() {
+    public DashBoardPatient(String ID, String FileName) {
         initComponents();
+        this.CurrentID = ID;
+        this.FileName = FileName;
     }
 
     /**
@@ -34,6 +42,8 @@ public class DashBoardPatient extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+        btnLogOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,6 +70,25 @@ public class DashBoardPatient extends javax.swing.JFrame {
         jButton6.setText("View Prescription");
 
         jButton7.setText("Delete Account");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        btnLogOut.setText("Log Out");
+        btnLogOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogOutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,6 +105,12 @@ public class DashBoardPatient extends javax.swing.JFrame {
                     .addComponent(jButton6)
                     .addComponent(jButton7))
                 .addContainerGap(251, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSave)
+                .addGap(18, 18, 18)
+                .addComponent(btnLogOut)
+                .addGap(68, 68, 68))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,21 +129,51 @@ public class DashBoardPatient extends javax.swing.JFrame {
                 .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton7)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSave)
+                    .addComponent(btnLogOut))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new DocFeedBack().setVisible(true);
+        new DocFeedBack(CurrentID, FileName).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new ViewDocFeedback().setVisible(true);
+        new ViewDocFeedback(CurrentID, FileName).setVisible(true);
         //this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        String FileName = "";
+        final JFileChooser Chooser = new JFileChooser();
+        int responce = Chooser.showSaveDialog(DashBoardPatient.this);
+        if (responce == JFileChooser.APPROVE_OPTION)
+        {
+            FileName = Chooser.getSelectedFile().toString();
+            SavingJSON.Save(FileName);
+            //SHOW LOGIN PAGE
+        }
+        else
+        {
+            
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        new DeleteAccount(CurrentID, FileName).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
+        new Login(FileName).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLogOutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,12 +206,14 @@ public class DashBoardPatient extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DashBoardPatient().setVisible(true);
+                new DashBoardPatient(CurrentID, FileName).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogOut;
+    private javax.swing.JButton btnSave;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
