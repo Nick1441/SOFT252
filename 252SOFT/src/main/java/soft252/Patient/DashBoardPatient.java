@@ -39,7 +39,7 @@ public class DashBoardPatient extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnViewApp = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
@@ -62,10 +62,20 @@ public class DashBoardPatient extends javax.swing.JFrame {
         });
 
         jButton3.setText("Request Appointment");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("View History");
 
-        jButton5.setText("View Appointments");
+        btnViewApp.setText("View Appointments");
+        btnViewApp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewAppActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("View Prescription");
 
@@ -101,7 +111,7 @@ public class DashBoardPatient extends javax.swing.JFrame {
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
-                    .addComponent(jButton5)
+                    .addComponent(btnViewApp)
                     .addComponent(jButton6)
                     .addComponent(jButton7))
                 .addContainerGap(251, Short.MAX_VALUE))
@@ -124,7 +134,7 @@ public class DashBoardPatient extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
+                .addComponent(btnViewApp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -175,6 +185,16 @@ public class DashBoardPatient extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnLogOutActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        new AppointmentRequest(CurrentID, FileName).setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnViewAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAppActionPerformed
+        new ViewAppointments(CurrentID, FileName).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnViewAppActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -214,11 +234,11 @@ public class DashBoardPatient extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogOut;
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnViewApp;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     // End of variables declaration//GEN-END:variables

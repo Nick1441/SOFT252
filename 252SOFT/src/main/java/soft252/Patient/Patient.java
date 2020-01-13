@@ -5,8 +5,8 @@ import soft252.System.SystemDatabase;
 /**
  *
  * @author Nick1
- * MAKE IT SO IT GETS LAST PATIENT IN ARRAY AND ADDS 1 TO IT.
- * MAKE IT SEARCH THROUGH DATABASE.
+ * THIS IS TEMPLATE CLASS. THESE ARE TEMPLATES.
+ *
  * 
  */
 public class Patient implements ICreateUser {

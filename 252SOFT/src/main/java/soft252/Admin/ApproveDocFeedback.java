@@ -6,6 +6,7 @@
 package soft252.Admin;
 
 import soft252.JSONSaving.SavingJSON;
+import soft252.Other.Notify;
 import soft252.System.SystemDatabase;
 
 /**
@@ -19,6 +20,7 @@ public class ApproveDocFeedback extends javax.swing.JFrame {
      */
     public static String FileName;
     public static String CurrentID = "";
+    String DocID;
     public ApproveDocFeedback(String ID, String FileName) {
         initComponents();
         this.CurrentID = ID;
@@ -52,11 +54,12 @@ public class ApproveDocFeedback extends javax.swing.JFrame {
     private void initComponents() {
 
         DocBox = new javax.swing.JComboBox<>();
-        checkApproved = new java.awt.Checkbox();
         btnBack = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaFeedback = new javax.swing.JTextArea();
         btnSave = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtInfo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,8 +74,6 @@ public class ApproveDocFeedback extends javax.swing.JFrame {
             }
         });
 
-        checkApproved.setLabel("Approved");
-
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,12 +85,17 @@ public class ApproveDocFeedback extends javax.swing.JFrame {
         txtAreaFeedback.setRows(5);
         jScrollPane1.setViewportView(txtAreaFeedback);
 
-        btnSave.setText("Save");
+        btnSave.setText("Send Feedback");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("Send Feedback To Doctor");
+
+        txtInfo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtInfo.setText("fdf");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,33 +108,38 @@ public class ApproveDocFeedback extends javax.swing.JFrame {
                         .addComponent(DocBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 29, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(txtInfo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 3, Short.MAX_VALUE)
                         .addComponent(btnSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBack)
-                        .addGap(29, 29, 29))
+                        .addComponent(btnBack))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(checkApproved, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(DocBox, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DocBox, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(checkApproved, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnBack)
                             .addComponent(btnSave)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -166,13 +177,22 @@ public class ApproveDocFeedback extends javax.swing.JFrame {
         txtAreaFeedback.append("Notes - " + SystemDatabase.DocFeed.get(Chosen).getNotes() + "\n");
         txtAreaFeedback.append("\n");
         
-        checkApproved.setState(SystemDatabase.DocFeed.get(Chosen).getApproved());
+        DocID = SystemDatabase.DocFeed.get(Chosen).getDocID();
+        
+        //Can Be Used Incase Want Admins To Approve Feedback Before Being Public.
+        //checkApproved.setState(SystemDatabase.DocFeed.get(Chosen).getApproved());
     }//GEN-LAST:event_DocBoxItemStateChanged
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        //Update Approved Incase it Was Changed.
-        int Chosen = DocBox.getSelectedIndex();
-        SystemDatabase.DocFeed.get(Chosen).setApproved(checkApproved.getState());
+        
+        String Info = "Feedback - " + txtInfo.getText() + "\n";
+        System.out.println(DocID);
+        
+        Notify Not = new Notify(DocID, Info);
+        
+        SystemDatabase.Notifications.add(Not);
+        //FIND STRING TO SEND TO DOCTOR WHEN THEY LOG IN.
+        //Create Notify Object, Add To Notify Array.
         SavingJSON.Save(FileName);
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -215,8 +235,9 @@ public class ApproveDocFeedback extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> DocBox;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSave;
-    private java.awt.Checkbox checkApproved;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtAreaFeedback;
+    private javax.swing.JTextField txtInfo;
     // End of variables declaration//GEN-END:variables
 }

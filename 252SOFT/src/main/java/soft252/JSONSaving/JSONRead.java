@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+//This is an Adapter Pattern, This Takes JSON File, Converts in Into Java.
  */
 package soft252.JSONSaving;
 
@@ -26,6 +24,7 @@ import soft252.Patient.Patient;
 import soft252.Secretary.Secretary;
 import soft252.System.ICreateUser;
 import soft252.System.SystemDatabase;
+import soft252.Other.Notify;
 
 
 public class JSONRead {
@@ -156,6 +155,37 @@ public class JSONRead {
                
                SystemDatabase.Prescriptions.add(Pre);
            }
+           
+           //Getting Appointment Requests
+           JSONArray AppointmentRequests = (JSONArray) jsonobj.get("Appointment Requests");
+           
+           for (int i = 0; i < AppointmentRequests.size(); i++)
+           {
+               JSONObject Current = (JSONObject) AppointmentRequests.get(i);
+               String DocID = Current.get("DocID").toString();
+               String PatientID = Current.get("PatientID").toString();
+               String Dates = Current.get("Dates").toString();
+               Boolean Approved = (Boolean) Current.get("Approved");
+               
+               Appointment App = new Appointment(DocID, PatientID, Dates, Approved);
+               
+               SystemDatabase.AppRequest.add(App);
+           }
+           
+           //Getting Notifcations 
+           JSONArray Notifications = (JSONArray) jsonobj.get("Notifications");
+           
+           for (int i = 0; i < Notifications.size(); i++)
+           {
+               JSONObject Current = (JSONObject) Notifications.get(i);
+               String NotifyID = Current.get("NotifyID").toString();
+               String Info = Current.get("Info").toString();
+               
+               Notify Not = new Notify(NotifyID, Info);
+               
+               SystemDatabase.Notifications.add(Not);
+           }
+          
         }
         catch(FileNotFoundException e)
         {

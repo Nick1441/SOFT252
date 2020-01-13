@@ -20,7 +20,8 @@ import soft252.Secretary.Secretary;
 import soft252.System.Startup;
 /**
  *
- * @author Nick1
+ * @author Nick
+ * 
  */
 public class SavingJSON {
     
@@ -126,6 +127,33 @@ public class SavingJSON {
             PreJSON.add(EachPre);
         }
         obj.put("Prescriptions", PreJSON);
+        
+        
+        //SAVIING APPOINTMENT REQUEST ARRAY
+        JSONArray AppReqJSON = new JSONArray();
+        for (int i = 0; i < SystemDatabase.AppRequest.size(); i++)
+        {
+            JSONObject EachReq = new JSONObject();
+            EachReq.put("DocID", SystemDatabase.AppRequest.get(i).getDocID());
+            EachReq.put("PatientID", SystemDatabase.AppRequest.get(i).getPatientID());
+            EachReq.put("Dates", SystemDatabase.AppRequest.get(i).getDates());
+            EachReq.put("Approved", SystemDatabase.AppRequest.get(i).getApproved());
+            
+            AppReqJSON.add(EachReq);
+        }
+        obj.put("Appointment Requests", AppReqJSON);
+        
+        //SAVING NOTIFICATIONS ARRAY
+        JSONArray NotJSON = new JSONArray();
+        for (int i = 0; i < SystemDatabase.Notifications.size(); i++)
+        {
+            JSONObject EachNot = new JSONObject();
+            EachNot.put("NotifyID", SystemDatabase.Notifications.get(i).getNotifyID());
+            EachNot.put("Info", SystemDatabase.Notifications.get(i).getInfo());
+            
+            NotJSON.add(EachNot);
+        }
+        obj.put("Notifications", NotJSON);
         
         //SAVING
         try (FileWriter file = new FileWriter(FileName))

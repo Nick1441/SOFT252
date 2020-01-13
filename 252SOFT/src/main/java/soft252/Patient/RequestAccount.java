@@ -8,6 +8,7 @@ package soft252.Patient;
 import soft252.JSONSaving.SavingJSON;
 import soft252.Login;
 import soft252.Other.AccountRequest;
+import soft252.Other.Notify;
 import soft252.System.SystemDatabase;
 
 /**
@@ -48,6 +49,7 @@ public class RequestAccount extends javax.swing.JFrame {
         txtPassword = new javax.swing.JTextField();
         txtGender = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,6 +80,13 @@ public class RequestAccount extends javax.swing.JFrame {
             }
         });
 
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,6 +105,8 @@ public class RequestAccount extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSubmit)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBack)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblReqAccount)
@@ -124,7 +135,6 @@ public class RequestAccount extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtLast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(62, 62, 62)
@@ -144,8 +154,10 @@ public class RequestAccount extends javax.swing.JFrame {
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))))
                 .addGap(18, 18, 18)
-                .addComponent(btnSubmit)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSubmit)
+                    .addComponent(btnBack))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -167,22 +179,29 @@ public class RequestAccount extends javax.swing.JFrame {
         AccountRequest NewUser = new AccountRequest(First, Last, Address, Age, Gender, Password);
         
         SystemDatabase.AccountReq.add(NewUser);
+        
+        
+        String NoteString = "New User Requested - " + First + " " + Last + "\nCheck User Requests To Confirm";
+        Notify Note = new Notify("S", NoteString);
+        SystemDatabase.Notifications.add(Note);
         SavingJSON.Save(FileName);
-        //
-        //NOTIFY SECRETARTY OF NEW REQUEST. THEY NEED TO APPROVE AND ADD TO USERS.
-        //
         new Login(FileName).setVisible(true);
         this.dispose();
         
         //TESTING.
-        System.out.println(SystemDatabase.AccountReq.get(0).getFirstName());
-        System.out.println(SystemDatabase.AccountReq.get(0).getLastName());
-        System.out.println(SystemDatabase.AccountReq.get(0).getAddress());
-        System.out.println(SystemDatabase.AccountReq.get(0).getAge());
-        System.out.println(SystemDatabase.AccountReq.get(0).getGender());
-        System.out.println( SystemDatabase.AccountReq.get(0).getPassword());
+//        System.out.println(SystemDatabase.AccountReq.get(0).getFirstName());
+//        System.out.println(SystemDatabase.AccountReq.get(0).getLastName());
+//        System.out.println(SystemDatabase.AccountReq.get(0).getAddress());
+//        System.out.println(SystemDatabase.AccountReq.get(0).getAge());
+//        System.out.println(SystemDatabase.AccountReq.get(0).getGender());
+//        System.out.println( SystemDatabase.AccountReq.get(0).getPassword());
         
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        new Login(FileName).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,6 +239,7 @@ public class RequestAccount extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

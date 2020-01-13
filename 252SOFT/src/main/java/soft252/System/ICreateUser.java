@@ -7,7 +7,7 @@ package soft252.System;
 
 /**
  *
- * @author Nick1
+ * THIS IS TEMPLATE PATTERN.
  */
 public interface ICreateUser {
     String UserID = "";

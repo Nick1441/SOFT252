@@ -11,10 +11,5 @@ import soft252.System.SystemDatabase;
  * @author Nick1
  */
 public class Controller {
-//    Adding User To Data Base
-    public void AddUser()
-    {
-        
-    }
     
 }

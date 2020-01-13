@@ -2,6 +2,9 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+
+//THIS MAY BE STATE PATTERN, THIS CLASS IS A STATE, 
+// WHILE APPOINTMENTS IS A DIFFERNT STATE, IT HAS BEEN APPROVED.
  */
 package soft252.Other;
 

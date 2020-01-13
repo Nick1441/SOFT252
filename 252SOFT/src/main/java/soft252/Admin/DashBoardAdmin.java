@@ -34,7 +34,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         btnAddAccount = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnRemoveAccounts = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         btnLogOut = new javax.swing.JButton();
@@ -48,7 +48,12 @@ public class DashBoardAdmin extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Remove Accounts");
+        btnRemoveAccounts.setText("Remove Accounts");
+        btnRemoveAccounts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveAccountsActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Approve Doc Feedback");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -74,7 +79,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAddAccount)
-                    .addComponent(jButton2)
+                    .addComponent(btnRemoveAccounts)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
                 .addContainerGap(247, Short.MAX_VALUE))
@@ -89,7 +94,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnAddAccount)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(btnRemoveAccounts)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
                 .addGap(18, 18, 18)
@@ -116,6 +121,11 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         new ApproveDocFeedback(CurrentID, FileName).setVisible(true);
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnRemoveAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveAccountsActionPerformed
+        new RemoveDocSec(CurrentID, FileName).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRemoveAccountsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,7 +165,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddAccount;
     private javax.swing.JButton btnLogOut;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnRemoveAccounts;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     // End of variables declaration//GEN-END:variables

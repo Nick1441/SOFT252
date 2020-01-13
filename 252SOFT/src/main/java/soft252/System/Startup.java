@@ -36,6 +36,7 @@ public class Startup extends javax.swing.JFrame {
         lblImport = new javax.swing.JLabel();
         btnNew = new javax.swing.JButton();
         btnImport = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +58,13 @@ public class Startup extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -71,6 +79,10 @@ public class Startup extends javax.swing.JFrame {
                     .addComponent(lblImport, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnImport, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(98, 98, 98))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(155, 155, 155))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,7 +95,9 @@ public class Startup extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnImport)
                     .addComponent(btnNew))
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(jButton1)
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         pack();
@@ -136,6 +150,13 @@ public class Startup extends javax.swing.JFrame {
         //new <JFrameName>(<if constructors used>).setVisible(true);
     }//GEN-LAST:event_btnNewActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            FileName = "E:\\Users\\Nick\\Documents\\GitHub\\SOFT252\\252SOFT\\DoctorsDatabase  - Backup.json";
+            JSONRead.Import(FileName);
+            this.setVisible(false);
+            new Login(FileName).setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -175,6 +196,7 @@ public class Startup extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnImport;
     private javax.swing.JButton btnNew;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblImport;
     private javax.swing.JLabel lblNew;
     // End of variables declaration//GEN-END:variables

@@ -20,6 +20,7 @@ public class ViewDocFeedback extends javax.swing.JFrame {
         initComponents();
         this.CurrentID = ID;
         this.FileName = FileName;
+        
         DocBox.removeAllItems();
         
         for (int i = 0; i < SystemDatabase.Users.size(); i++)
@@ -182,12 +183,15 @@ public class ViewDocFeedback extends javax.swing.JFrame {
         
         for (int i = 0; i < SystemDatabase.DocFeed.size(); i++)
         {
-            if (SystemDatabase.DocFeed.get(i).getDocID().equals(DocID) && SystemDatabase.DocFeed.get(i).getApproved().equals(true))
+            // && SystemDatabase.DocFeed.get(i).getApproved().equals(true)
+            //Can Be added With Other Lines to Have Admins Approve Feedback Before Being Shown
+            if (SystemDatabase.DocFeed.get(i).getDocID().equals(DocID))
             {
                 Integer Rating = SystemDatabase.DocFeed.get(i).getRating();
                 txtAreaFeedback.append("Dr "+ DocLast + " - " +SystemDatabase.DocFeed.get(i).getDocID() + "\n");
                 txtAreaFeedback.append("Rating - " + Rating.toString() + "/5" + "\n");
-                txtAreaFeedback.append("Notes - " + SystemDatabase.DocFeed.get(i).getNotes() + "\n");
+                //Not Required To Show To Patients, Only Admin Sees For Feedback.
+                //txtAreaFeedback.append("Notes - " + SystemDatabase.DocFeed.get(i).getNotes() + "\n");
                 txtAreaFeedback.append("\n");
                 
             }

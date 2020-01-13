@@ -6,8 +6,10 @@
 package soft252;
 
 import soft252.Admin.DashBoardAdmin;
+import soft252.Doctor.DashBoardDoctor;
 import soft252.Patient.DashBoardPatient;
 import soft252.Patient.RequestAccount;
+import soft252.Secretary.DashBoardSecretary;
 import soft252.System.SystemDatabase;
 
 /**
@@ -173,6 +175,8 @@ public class Login extends javax.swing.JFrame {
         else if (Rank.equals("D"))
         {
             //Open Doctor DashBoard.
+            new DashBoardDoctor(ID, FileName).setVisible(true);
+            this.dispose();
         }
         else if (Rank.equals("A"))
         {
@@ -183,7 +187,8 @@ public class Login extends javax.swing.JFrame {
         else if (Rank.equals("S"))
         {
             //Open Secretary DashBoard.
-            
+            new DashBoardSecretary(ID, FileName).setVisible(true);
+            this.dispose();
         }
     }
     /**

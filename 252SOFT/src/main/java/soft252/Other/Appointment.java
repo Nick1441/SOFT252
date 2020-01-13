@@ -17,7 +17,6 @@ public class Appointment {
         this.PatientID = PatientID;
         this.Dates = Dates;
         this.Approved = Approved;
-
     }
 
     public String getDocID() {
