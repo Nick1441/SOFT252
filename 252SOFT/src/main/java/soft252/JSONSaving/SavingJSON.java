@@ -1,28 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package soft252.JSONSaving;
+
+//Importing File Writer.
 import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JFileChooser;
+
+//Importing JSON Objects For Writing To JSON from Database.
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+//Importing Classes That are being saved.
 import soft252.Admin.Admin;
 import soft252.System.ICreateUser;
 import soft252.System.SystemDatabase;
-
 import soft252.Doctor.Doctor;
 import soft252.Other.Medicine;
 import soft252.Patient.Patient;
 import soft252.Secretary.Secretary;
 import soft252.System.Startup;
-/**
- *
- * @author Nick
- * 
- */
+
 public class SavingJSON {
     
     public static void Save(String FileName)

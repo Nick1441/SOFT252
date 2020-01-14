@@ -1,9 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package soft252.System;
+
+//Importing Classes which are made into ArrayLists.
 import java.util.ArrayList;
 import soft252.Other.AccountRequest;
 import soft252.Other.Appointment;
@@ -13,12 +10,8 @@ import soft252.Other.Notify;
 import soft252.Other.Prescription;
 
 
-/**
- *
- * @author Nick1
- */
 public  class SystemDatabase {
-    //public static ICreateUser[] Users2 = new ICreateUser[0];
+    //Created Array Lists for Everything that will be Stored inside of these.
     public static ArrayList<ICreateUser> Users = new ArrayList<ICreateUser>(); 
     public static ArrayList<DoctorFeedback> DocFeed = new ArrayList<DoctorFeedback>();
     public static ArrayList<AccountRequest> AccountReq = new ArrayList<AccountRequest>();

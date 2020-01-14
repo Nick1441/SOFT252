@@ -1,25 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
-
-//THIS MAY BE STATE PATTERN, THIS CLASS IS A STATE, 
-// WHILE APPOINTMENTS IS A DIFFERNT STATE, IT HAS BEEN APPROVED.
- */
 package soft252.Other;
-
 /**
- *
- * 
+ *  This Class Uses State Pattern. User Is Created into s state, Until Changed By A Secretary.
+ *  Once changed, State is moved to User Form RequestedUser.
  */
 public class AccountRequest {
-    String FirstName;
-    String LastName;
-    String Address;
-    Integer Age;
-    String Gender;
-    String Password;
+    private String FirstName;
+    private String LastName;
+    private String Address;
+    private Integer Age;
+    private String Gender;
+    private String Password;
 
+    //Creating New Temp User. Info The User is wanting ot have on the account.
     public AccountRequest(String FirstName, String LastName, String Address, Integer Age, String Gender, String Password) 
     {
         this.FirstName = FirstName;

@@ -1,35 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package soft252.Secretary;
 
 import javax.swing.JOptionPane;
+
+//Imports Required Classes.
 import soft252.JSONSaving.SavingJSON;
 import soft252.Login;
 import static soft252.Secretary.MedOrder.CurrentID;
 import static soft252.Secretary.MedOrder.FileName;
 import soft252.System.SystemDatabase;
 
-/**
- *
- * @author Nick1
- */
 public class DashBoardSecretary extends javax.swing.JFrame {
-
-    /**
-     * Creates new form DashBoardSecretary
-     */
     
     public static String CurrentID;
     public static String FileName;
     
+    //Creates New Dashboard.
     public DashBoardSecretary(String ID, String FileName) {
         initComponents();
         this.CurrentID = ID;
         this.FileName = FileName;
         
+        //Checks for Notifications for User, or Rank.
         String Notifications = "";
         for (int i  = 0; i < SystemDatabase.Notifications.size(); i++)
         {
@@ -45,12 +36,14 @@ public class DashBoardSecretary extends javax.swing.JFrame {
             }
         }
         
+        //if there is any Notifications. Popup Displays them.
         if (Notifications != "")
         {
             
             JOptionPane.showMessageDialog(null, Notifications, "Notifications", JOptionPane.WARNING_MESSAGE);
         }
         
+        //Saves JSON with Removed Notifications.
         SavingJSON.Save(FileName);
     }
 
@@ -66,13 +59,14 @@ public class DashBoardSecretary extends javax.swing.JFrame {
         btnReqAcc = new javax.swing.JButton();
         btnAppointment = new javax.swing.JButton();
         btnMedication = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         btnOrderMed = new javax.swing.JButton();
         btnTerminate = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        btnReqAcc.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnReqAcc.setText("Requested Patient Accounts");
         btnReqAcc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,6 +74,7 @@ public class DashBoardSecretary extends javax.swing.JFrame {
             }
         });
 
+        btnAppointment.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnAppointment.setText("View/Create Appointments");
         btnAppointment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,6 +82,7 @@ public class DashBoardSecretary extends javax.swing.JFrame {
             }
         });
 
+        btnMedication.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnMedication.setText("Give Medication");
         btnMedication.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,8 +90,7 @@ public class DashBoardSecretary extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Remove Patients");
-
+        btnOrderMed.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnOrderMed.setText("OrderStock");
         btnOrderMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +98,7 @@ public class DashBoardSecretary extends javax.swing.JFrame {
             }
         });
 
+        btnTerminate.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnTerminate.setText("Requested Account Termination");
         btnTerminate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,6 +106,7 @@ public class DashBoardSecretary extends javax.swing.JFrame {
             }
         });
 
+        btnLogout.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnLogout.setText("Log Out");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,49 +114,53 @@ public class DashBoardSecretary extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel1.setText("Secretary Dashboard");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAppointment)
-                            .addComponent(btnReqAcc)
-                            .addComponent(btnMedication)
-                            .addComponent(jButton5)
-                            .addComponent(btnOrderMed)
-                            .addComponent(btnTerminate)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(btnLogout)))
+                            .addComponent(btnReqAcc, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnTerminate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnOrderMed, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnMedication, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReqAcc)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAppointment)
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnMedication)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnOrderMed)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnTerminate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLogout)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Opens Forms Depending on Button Selected.
     private void btnReqAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReqAccActionPerformed
         new ReqPatAcc(CurrentID, FileName).setVisible(true);
         this.dispose();
@@ -233,6 +234,6 @@ public class DashBoardSecretary extends javax.swing.JFrame {
     private javax.swing.JButton btnOrderMed;
     private javax.swing.JButton btnReqAcc;
     private javax.swing.JButton btnTerminate;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

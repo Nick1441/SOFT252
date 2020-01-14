@@ -1,16 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package soft252.Other;
 
 public class Appointment {
-    String DocID;
-    String PatientID;
-    String Dates;
-    Boolean Approved;
+    private String DocID;
+    private String PatientID;
+    private String Dates;
+    private Boolean Approved;
 
+    //Creating Appointment, Constructor Getting Passed Infomation.
     public Appointment(String DocID, String PatientID, String Dates, Boolean Approved)
     {
         this.DocID = DocID;

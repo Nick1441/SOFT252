@@ -3,16 +3,19 @@
  */
 package soft252.JSONSaving;
 
+//Importing File Reader.
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Iterator;
 
+//Importing JSON Objects for File Reading.
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
 import org.json.simple.parser.JSONParser;
+
+//Importing Classes Used for Reading From JSON to Database.
 import soft252.Admin.Admin;
 import soft252.Doctor.Doctor;
 import soft252.Other.AccountRequest;

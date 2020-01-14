@@ -1,32 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package soft252.Patient;
 
+//Importing Required Classes.
 import soft252.JSONSaving.SavingJSON;
 import soft252.Other.Appointment;
 import soft252.Other.Notify;
 import soft252.System.SystemDatabase;
 import static soft252.System.SystemDatabase.Users;
 
-/**
- *
- * @author Nick1
- */
 public class AppointmentRequest extends javax.swing.JFrame {
 
     public static String CurrentID;
     public static String FileName;
-
+    
+    //Used when creating new appointment request.
     public AppointmentRequest(String ID, String FileName) {
         initComponents();
         this.CurrentID = ID;
         this.FileName = FileName;
         System.out.println(ID);
         
-                //ADDING DOCTORS TO THE DROP DOWN
+        //Addig Doctors To drop down box.
         cmbDoc.removeAllItems();
         
         for (int i = 0; i < SystemDatabase.Users.size(); i++)
@@ -138,6 +131,7 @@ public class AppointmentRequest extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         
+        //Gets Info When Saved. Finds Doctor.
         String DocID = "";
         String DocLast = "";
         int DocNumber = cmbDoc.getSelectedIndex() + 1;
@@ -158,12 +152,15 @@ public class AppointmentRequest extends javax.swing.JFrame {
         
         String Dates = txtaDates.getText();
         
+        //Created New Appointment & Adds to database.
         Appointment NewApp = new Appointment(DocID, CurrentID, Dates, false);
         SystemDatabase.AppRequest.add(NewApp);
         
+        //Crteates New Notification, Adds To Database.
         Notify Not = new Notify("S", "New Appointment Request for " + CurrentID + ". Check Appointments for More.");
         SystemDatabase.Notifications.add(Not);
         
+        //Saves Updated Database to JSON File.
         SavingJSON.Save(FileName);
     }//GEN-LAST:event_btnSaveActionPerformed
 

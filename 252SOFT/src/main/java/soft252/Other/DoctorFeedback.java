@@ -1,20 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package soft252.Other;
 
-/**
- *
- * @author Nick1
- */
 public class DoctorFeedback {
-    String DoctorID;
-    int Rating;
-    String Notes;
-    Boolean Approved;
+    private String DoctorID;
+    private int Rating;
+    private String Notes;
+    private Boolean Approved;
     
+    //Used When Creatig Feedback Object.
     public DoctorFeedback(String DocID, int Rate, String Notes, Boolean Approved)
     {
         this.DoctorID = DocID;

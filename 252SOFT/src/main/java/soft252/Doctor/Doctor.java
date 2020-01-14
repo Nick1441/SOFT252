@@ -1,24 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package soft252.Doctor;
+
+//Importing Classes. Implements Classes.
 import soft252.System.ICreateUser;
 import soft252.System.SystemDatabase;
 
-/**
- *
- * @author Nick1
- */
 public class Doctor implements ICreateUser{
-    String UserID;
-    String FirstName;
-    String LastName;
-    String Address;
-    String Password;
+    private String UserID;
+    private String FirstName;
+    private String LastName;
+    private String Address;
+    private String Password;
     
-    
+    //Used When Creating User Without ID, e.g. new User.
     public Doctor(String First, String Last, String Address, Integer Age, String Gender, String Password)
     {   
         int Num = DFinder();
@@ -29,6 +22,7 @@ public class Doctor implements ICreateUser{
         this.Password = Password;
     }
     
+    //Used when creating user with ID, e.g. reading from file.
     public Doctor(String First, String Last, String Address, Integer Age, String Gender,String Password, String ID)
     {
         this.UserID = ID;
@@ -38,6 +32,7 @@ public class Doctor implements ICreateUser{
         this.Password = Password;
     }
     
+    //Finds next Available number is System Users. For New users.
     public Integer DFinder()
     {
         Integer Number = 1;

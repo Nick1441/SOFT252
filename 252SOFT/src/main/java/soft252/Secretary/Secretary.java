@@ -13,12 +13,13 @@ import soft252.System.SystemDatabase;
  * @author Nick1
  */
 public class Secretary implements ICreateUser{
-    String UserID;
-    String FirstName;
-    String LastName;
-    String Address;
-    String Password;
+    private String UserID;
+    private String FirstName;
+    private String LastName;
+    private String Address;
+    private String Password;
     
+    //Used when creating new Secretartys. Generates UserID.
     public Secretary(String First, String Last, String Address, Integer Age, String Gender, String Password)
     {
         int Num = SFinder();
@@ -29,6 +30,7 @@ public class Secretary implements ICreateUser{
         this.Password = Password;
     }
     
+    //Used when ID is known, e.g. importing from File.
     public Secretary(String First, String Last, String Address, Integer Age, String Gender,String Password, String ID)
     {
         this.UserID = ID;
@@ -38,7 +40,8 @@ public class Secretary implements ICreateUser{
         this.Password = Password;
     }
     
-        public Integer SFinder()
+    //Finds next Number for UserID.
+    public Integer SFinder()
     {
         Integer Number = 1;
         for (int i = 0; i < SystemDatabase.Users.size(); i++)

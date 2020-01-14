@@ -1,23 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package soft252.Other;
 
-/**
- *
- * @author Nick1
- */
 public class Prescription {
-    String DocID;
-    String PatientID;
-    String DoctorNotes;
-    String MedicationName;
-    Integer Quantity;
-    String Dosage;
-    Boolean Completed;
+    private String DocID;
+    private String PatientID;
+    private String DoctorNotes;
+    private String MedicationName;
+    private Integer Quantity;
+    private String Dosage;
+    private Boolean Completed;
     
+    //Used When Calling Creating New Prescription.
     public Prescription(String DocID, String PatientID, String DoctorNotes, String MedicationName, Integer Quantity, String Dosage, Boolean Completed)
     {
         this.DocID = DocID;

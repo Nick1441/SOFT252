@@ -6,12 +6,12 @@
 package soft252.Other;
 
 /**
- *
- * @author Nick1
+ * This is Mostly Notification pattern.
+ * Creates New Notification with Destination and Infomation to show.
  */
 public class Notify {
-    String NotifyID;
-    String Info;
+    private String NotifyID;
+    private String Info;
 
     public Notify(String NotifyID, String Info) {
         this.NotifyID = NotifyID;

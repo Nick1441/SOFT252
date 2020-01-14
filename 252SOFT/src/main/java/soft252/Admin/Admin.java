@@ -12,12 +12,13 @@ import soft252.System.SystemDatabase;
  * @author Nick1
  */
 public class Admin implements ICreateUser{
-    String UserID;
-    String FirstName;
-    String LastName;
-    String Address;
-    String Password;
+    private String UserID;
+    private String FirstName;
+    private String LastName;
+    private String Address;
+    private String Password;
     
+    //Used When Creating User Without an ID, e.g Adding New User.
     public Admin(String First, String Last, String Address, Integer Age, String Gender, String Password)
     {
         int Num = AFinder();
@@ -28,7 +29,8 @@ public class Admin implements ICreateUser{
         this.Password = Password;
     }
     
-        public Admin(String First, String Last, String Address, Integer Age, String Gender,String Password, String ID)
+    //Used When Creating User When ID is Known. E.g Reading From JSON File.
+    public Admin(String First, String Last, String Address, Integer Age, String Gender,String Password, String ID)
     {
         this.UserID = ID;
         this.FirstName = First;
@@ -36,7 +38,8 @@ public class Admin implements ICreateUser{
         this.Address = Address;
         this.Password = Password;
     }
-        
+    
+    //Finds The Next Number For Login. Used When Creating New User.
     public Integer AFinder()
     {
         Integer Number = 1;

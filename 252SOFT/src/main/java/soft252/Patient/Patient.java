@@ -1,26 +1,27 @@
 package soft252.Patient;
+
+//Importing Required Classes.
 import soft252.System.ICreateUser;
 import soft252.System.SystemDatabase;
 
 /**
  *
- * @author Nick1
- * THIS IS TEMPLATE CLASS. THESE ARE TEMPLATES.
- *
+ * This Is the Template Class, This is a Template BAsed on the ICreateUser Class.
  * 
  */
 public class Patient implements ICreateUser {
    
-    String UserID;
-    String FirstName;
-    String LastName;
-    String Address;
+    private String UserID;
+    private String FirstName;
+    private String LastName;
+    private String Address;
     
-    Integer Age;
-    String Gender;
+    private Integer Age;
+    private String Gender;
     
     String Password;
     
+    //Used when creating Patient with no ID, e.g. new User.
     public Patient(String First, String Last, String Address, Integer Age, String Gender, String Password)
     {
         int Num = PFinder();
@@ -33,6 +34,7 @@ public class Patient implements ICreateUser {
         this.Password = Password;
     }
     
+    //Used when importing data from JSON.
     public Patient(String First, String Last, String Address, Integer Age, String Gender,String Password, String ID)
     {
         this.UserID = ID;
@@ -44,8 +46,10 @@ public class Patient implements ICreateUser {
         this.Password = Password;
     }
     
+    //Finds next avaiable Number for Next Creation User.
     public Integer PFinder()
     {
+        
         Integer Number = 1;
         for (int i = 0; i < SystemDatabase.Users.size(); i++)
         {
@@ -58,22 +62,6 @@ public class Patient implements ICreateUser {
         return Number;
     }
     
-//    public Integer LengthFinder()
-//    {
-//        Integer Number = 1;
-//        String id = "";
-//        
-//        for (Integer i = 0; i < SystemDatabase.Users.length; i++)
-//        {
-//            id = SystemDatabase.Users[i].getUserID();
-//            if (id == "p")
-//            {
-//                Number++;
-//            }
-//        }
-//        
-//        return Number;
-//    }
     
     @Override
     public String getUserID(){

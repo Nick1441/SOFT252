@@ -1,31 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package soft252.Doctor;
 
+import javax.swing.JOptionPane;
+
+//Importing Required Classes.
 import soft252.JSONSaving.SavingJSON;
 import soft252.Other.Prescription;
 import soft252.System.SystemDatabase;
 
-/**
- *
- * @author Nick1
- */
 public class PrescribeMedication extends javax.swing.JFrame {
 
-    /**
-     * Creates new form PrescribeMedication
-     */
     public static String CurrentID;
     public static String FileName;
     
+    //Creating New Form, Saving Passed In Variables.
     public PrescribeMedication(String CurrentID, String FileName) {
         initComponents();
         this.CurrentID = CurrentID;
         this.FileName = FileName;
         
+        //Adding Patients To ComboBox.
         for (int i = 0; i < SystemDatabase.Users.size(); i++)
         {
             if (SystemDatabase.Users.get(i).getUserID().substring(0, 1).equals("P"))
@@ -34,6 +27,7 @@ public class PrescribeMedication extends javax.swing.JFrame {
             }
         }
         
+        //Adding Medication To ComboBox.
         for (int i = 0; i < SystemDatabase.Medication.size(); i++)
         {
                 cmbMed.addItem(SystemDatabase.Medication.get(i).getName());
@@ -57,31 +51,56 @@ public class PrescribeMedication extends javax.swing.JFrame {
         txtDosage = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        cmbPat.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setText("Select Patient");
 
         txtInfo.setColumns(20);
+        txtInfo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         txtInfo.setRows(5);
         jScrollPane1.setViewportView(txtInfo);
 
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setText("Appointment Notes");
 
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setText("Medication");
 
+        cmbMed.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Dosage");
 
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setText("Amount");
 
-        btnSave.setText("jButton1");
+        txtQua.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        txtDosage.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        btnSave.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
             }
         });
 
-        btnBack.setText("jButton2");
+        btnBack.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel6.setText("Prescribe Medication/Notes");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,11 +112,15 @@ public class PrescribeMedication extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(cmbPat, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1))
-                            .addComponent(jLabel2)))
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cmbPat, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,16 +137,18 @@ public class PrescribeMedication extends javax.swing.JFrame {
                         .addComponent(btnSave)
                         .addGap(18, 18, 18)
                         .addComponent(btnBack)))
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addGap(11, 11, 11))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbPat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addComponent(jLabel6)
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(cmbPat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addComponent(jLabel2)
                 .addGap(5, 5, 5)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -139,11 +164,11 @@ public class PrescribeMedication extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtDosage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave)
                     .addComponent(btnBack))
-                .addGap(36, 36, 36))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -151,6 +176,7 @@ public class PrescribeMedication extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         
+        //When Saved is Pressed, Text Infomation is saved into strings. Patient ID uses passed in CurrentID.
         String DocID = CurrentID;
         String PatientID = cmbPat.getSelectedItem().toString();
         String Notes = txtInfo.getText();
@@ -158,11 +184,21 @@ public class PrescribeMedication extends javax.swing.JFrame {
         int Quantity = Integer.parseInt(txtQua.getText());
         String Dosage = txtDosage.getText();
         
+        //Created New Prescription. Adds this into Database.
         Prescription Pre = new Prescription(DocID, PatientID, Notes, Medication, Quantity, Dosage, false);
         SystemDatabase.Prescriptions.add(Pre);
         
+        //Saved Updated Database to JSON.
         SavingJSON.Save(FileName);
+        
+        //Shows Popup for Visual Confomation.
+        JOptionPane.showMessageDialog(null, "Created Prescription Sucsessfully.", "Notifications", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        new DashBoardDoctor(CurrentID, FileName).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,6 +245,7 @@ public class PrescribeMedication extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtDosage;
     private javax.swing.JTextArea txtInfo;

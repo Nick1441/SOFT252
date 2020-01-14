@@ -1,24 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package soft252.Patient;
 
+//Imports Required Classes.
 import soft252.Doctor.Doctor;
 import soft252.Other.Prescription;
 import soft252.System.ICreateUser;
 import soft252.System.SystemDatabase;
 
-/**
- *
- * @author Nick1
- */
 public class ViewPrescription extends javax.swing.JFrame {
-
-    /**
-     * Creates new form ViewPrescription
-     */
     
     public static String CurrentID;
     public static String FileName;
@@ -31,6 +19,7 @@ public class ViewPrescription extends javax.swing.JFrame {
         this.CurrentID = CurrentID;
         this.FileName = FileName;
         
+        //Loads Prescriptions into Combobox.
         int n = 0;
         String m = "";
         for (int i = 0; i < SystemDatabase.Prescriptions.size(); i++)

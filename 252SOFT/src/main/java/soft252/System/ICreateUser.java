@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package soft252.System;
 
 /**
  *
- * THIS IS TEMPLATE PATTERN.
+ * This is the Base for the Template Pattern. Other users use this as a template for there classes.
  */
 public interface ICreateUser {
     String UserID = "";
