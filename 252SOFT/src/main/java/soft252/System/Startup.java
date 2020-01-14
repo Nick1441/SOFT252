@@ -21,6 +21,17 @@ public class Startup extends javax.swing.JFrame {
     public String FileName = "";
     public Startup() {
         initComponents();
+        
+        try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Windows".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
+            }
+        }
+        } catch (Exception ex) { 
+    ex.printStackTrace(); 
+}
     }
 
     /**

@@ -5,6 +5,10 @@
  */
 package soft252.Doctor;
 
+import soft252.Other.Appointment;
+import soft252.System.ICreateUser;
+import soft252.System.SystemDatabase;
+
 /**
  *
  * @author Nick1
@@ -14,8 +18,25 @@ public class ViewAppointments extends javax.swing.JFrame {
     /**
      * Creates new form ViewAppointments
      */
-    public ViewAppointments() {
+    
+    public static String CurrentID;
+    public static String FileName;
+    public Appointment App;
+    public ViewAppointments(String CurrentID, String FileName) {
         initComponents();
+        this.CurrentID = CurrentID;
+        this.FileName = FileName;
+        
+        for (int i = 0; i < SystemDatabase.Appointments.size(); i++)
+        {
+            if (SystemDatabase.Appointments.get(i).getDocID().equals(CurrentID))
+            {
+                App = SystemDatabase.Appointments.get(i);
+                txtInfo.append("Doctor - " + App.getDocID() + "\n");
+                txtInfo.append("Patient - " + App.getPatientID()+ "\n");
+                txtInfo.append("Date - " + App.getDates()+ "\n\n");
+            }
+        }
     }
 
     /**
@@ -27,21 +48,55 @@ public class ViewAppointments extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtInfo = new javax.swing.JTextArea();
+        btnback = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtInfo.setEditable(false);
+        txtInfo.setColumns(20);
+        txtInfo.setRows(5);
+        jScrollPane1.setViewportView(txtInfo);
+
+        btnback.setText("Back");
+        btnback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(btnback)
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(btnback)))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
+        new DashBoardDoctor(CurrentID, FileName).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnbackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -73,11 +128,14 @@ public class ViewAppointments extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewAppointments().setVisible(true);
+                new ViewAppointments(CurrentID, FileName).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnback;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea txtInfo;
     // End of variables declaration//GEN-END:variables
 }

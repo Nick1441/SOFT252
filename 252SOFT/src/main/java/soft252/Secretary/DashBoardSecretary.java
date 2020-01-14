@@ -8,6 +8,8 @@ package soft252.Secretary;
 import javax.swing.JOptionPane;
 import soft252.JSONSaving.SavingJSON;
 import soft252.Login;
+import static soft252.Secretary.MedOrder.CurrentID;
+import static soft252.Secretary.MedOrder.FileName;
 import soft252.System.SystemDatabase;
 
 /**
@@ -62,12 +64,11 @@ public class DashBoardSecretary extends javax.swing.JFrame {
     private void initComponents() {
 
         btnReqAcc = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnAppointment = new javax.swing.JButton();
+        btnMedication = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        btnOrderMed = new javax.swing.JButton();
+        btnTerminate = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -79,17 +80,35 @@ public class DashBoardSecretary extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Request Appointments");
+        btnAppointment.setText("View/Create Appointments");
+        btnAppointment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAppointmentActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Give Medication");
-
-        jButton4.setText("Create Appointment");
+        btnMedication.setText("Give Medication");
+        btnMedication.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMedicationActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Remove Patients");
 
-        jButton6.setText("OrderStock");
+        btnOrderMed.setText("OrderStock");
+        btnOrderMed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrderMedActionPerformed(evt);
+            }
+        });
 
-        jButton7.setText("Requested Account Termination");
+        btnTerminate.setText("Requested Account Termination");
+        btnTerminate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminateActionPerformed(evt);
+            }
+        });
 
         btnLogout.setText("Log Out");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -107,13 +126,12 @@ public class DashBoardSecretary extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
+                            .addComponent(btnAppointment)
                             .addComponent(btnReqAcc)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4)
+                            .addComponent(btnMedication)
                             .addComponent(jButton5)
-                            .addComponent(jButton6)
-                            .addComponent(jButton7)))
+                            .addComponent(btnOrderMed)
+                            .addComponent(btnTerminate)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addComponent(btnLogout)))
@@ -125,17 +143,15 @@ public class DashBoardSecretary extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnReqAcc)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(btnAppointment)
+                .addGap(40, 40, 40)
+                .addComponent(btnMedication)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
+                .addComponent(btnOrderMed)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton7)
+                .addComponent(btnTerminate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(btnLogout)
                 .addContainerGap())
@@ -154,6 +170,26 @@ public class DashBoardSecretary extends javax.swing.JFrame {
         new Login(FileName).setVisible(true);
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAppointmentActionPerformed
+        new CreatingAppointment(CurrentID, FileName).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAppointmentActionPerformed
+
+    private void btnTerminateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminateActionPerformed
+        new RemoveUser(CurrentID, FileName).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnTerminateActionPerformed
+
+    private void btnOrderMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderMedActionPerformed
+        new MedOrder(CurrentID, FileName).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnOrderMedActionPerformed
+
+    private void btnMedicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedicationActionPerformed
+        new GiveMedication(CurrentID, FileName).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMedicationActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,13 +227,12 @@ public class DashBoardSecretary extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAppointment;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnMedication;
+    private javax.swing.JButton btnOrderMed;
     private javax.swing.JButton btnReqAcc;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnTerminate;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     // End of variables declaration//GEN-END:variables
 }

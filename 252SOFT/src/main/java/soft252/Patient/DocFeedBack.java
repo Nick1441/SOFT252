@@ -94,8 +94,13 @@ public class DocFeedBack extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
-        btnFeedback.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        btnFeedback.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnFeedback.setText("Submit");
         btnFeedback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +108,7 @@ public class DocFeedBack extends javax.swing.JFrame {
             }
         });
 
+        DocBox.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         DocBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         DocBox.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -110,11 +116,11 @@ public class DocFeedBack extends javax.swing.JFrame {
             }
         });
 
-        lblDocFeedback.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblDocFeedback.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblDocFeedback.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDocFeedback.setText("Select Doctor");
 
-        lblDocFeedback1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblDocFeedback1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         lblDocFeedback1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDocFeedback1.setText("Doctor Feedback");
 
@@ -124,23 +130,23 @@ public class DocFeedBack extends javax.swing.JFrame {
             }
         });
 
-        lblDocFeedback2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblDocFeedback2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblDocFeedback2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDocFeedback2.setText("4");
 
-        lblDocFeedback3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblDocFeedback3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblDocFeedback3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDocFeedback3.setText("1");
 
-        lblDocFeedback4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblDocFeedback4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblDocFeedback4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDocFeedback4.setText("5");
 
-        lblDocFeedback5.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblDocFeedback5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblDocFeedback5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDocFeedback5.setText("2");
 
-        lblDocFeedback6.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblDocFeedback6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblDocFeedback6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDocFeedback6.setText("3");
 
@@ -195,15 +201,17 @@ public class DocFeedBack extends javax.swing.JFrame {
                     .addComponent(lblDocFeedback4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        lblDocFeedback7.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblDocFeedback7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblDocFeedback7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDocFeedback7.setText("Notes");
 
-        lblDocFeedback8.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        txtNotes.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        lblDocFeedback8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblDocFeedback8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDocFeedback8.setText("Select Rating");
 
-        btnBack.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        btnBack.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,66 +223,57 @@ public class DocFeedBack extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnFeedback)
+                .addGap(50, 50, 50)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblDocFeedback7, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblDocFeedback7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblDocFeedback8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblDocFeedback, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(74, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(116, 116, 116)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnBack))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblDocFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DocBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnFeedback)))
-                        .addGap(31, 31, 31))))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(173, Short.MAX_VALUE)
-                    .addComponent(lblDocFeedback1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(156, 156, 156)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(20, 20, 20)
-                    .addComponent(lblDocFeedback8, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(360, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(DocBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(lblDocFeedback1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addContainerGap()
+                .addComponent(lblDocFeedback1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDocFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DocBox, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DocBox, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(lblDocFeedback8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(lblDocFeedback7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNotes, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                    .addComponent(lblDocFeedback7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(21, 21, 21)
-                    .addComponent(lblDocFeedback1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(250, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(126, 126, 126)
-                    .addComponent(lblDocFeedback8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(145, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -361,6 +360,11 @@ public class DocFeedBack extends javax.swing.JFrame {
             this.setVisible(false);
             // TODO add your handling code here:
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+            new DashBoardPatient(CurrentID, FileName).setVisible(true);
+            this.setVisible(false);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

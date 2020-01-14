@@ -49,7 +49,7 @@ public class DashBoardDoctor extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, Notifications, "Notifications", JOptionPane.WARNING_MESSAGE);
         }
         
-        SavingJSON.Save(FileName);
+        //SavingJSON.Save(FileName);
 
     }
 
@@ -62,15 +62,42 @@ public class DashBoardDoctor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnViewApp = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        btnNotes = new javax.swing.JButton();
+        btnNewMed = new javax.swing.JButton();
+        btnNotMed = new javax.swing.JButton();
         btnHistory = new javax.swing.JButton();
         btnAppointment = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnViewApp = new javax.swing.JButton();
         btnLogOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnNewMed.setText("New Medication");
+        btnNewMed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewMedActionPerformed(evt);
+            }
+        });
+
+        btnNotMed.setText("Make Notes / Prescribe Medication");
+        btnNotMed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNotMedActionPerformed(evt);
+            }
+        });
+
+        btnHistory.setText("Patient History");
+        btnHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistoryActionPerformed(evt);
+            }
+        });
+
+        btnAppointment.setText("Create Appointment");
+        btnAppointment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAppointmentActionPerformed(evt);
+            }
+        });
 
         btnViewApp.setText("View Appointments");
         btnViewApp.addActionListener(new java.awt.event.ActionListener() {
@@ -78,16 +105,6 @@ public class DashBoardDoctor extends javax.swing.JFrame {
                 btnViewAppActionPerformed(evt);
             }
         });
-
-        jButton2.setText("Prescribe Medication");
-
-        btnNotes.setText("Make Notes");
-
-        btnHistory.setText("Patient History");
-
-        btnAppointment.setText("Create Appointment");
-
-        jButton6.setText("Create New Medication");
 
         btnLogOut.setText("Log Out");
         btnLogOut.addActionListener(new java.awt.event.ActionListener() {
@@ -101,18 +118,18 @@ public class DashBoardDoctor extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnViewApp)
-                    .addComponent(btnHistory)
-                    .addComponent(btnNotes)
-                    .addComponent(jButton2)
-                    .addComponent(btnAppointment)
-                    .addComponent(jButton6)))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                    .addComponent(btnNotMed, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAppointment, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnHistory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnViewApp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnNewMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogOut)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(239, 239, 239))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,32 +137,51 @@ public class DashBoardDoctor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnViewApp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnNotes)
+                .addComponent(btnNotMed)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnHistory)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAppointment)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnNewMed)
+                .addGap(35, 35, 35)
                 .addComponent(btnLogOut)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
+        SavingJSON.Save(FileName);
         new Login(FileName).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLogOutActionPerformed
 
-    private void btnViewAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAppActionPerformed
+    private void btnNewMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewMedActionPerformed
         new NewMedication(CurrentID, FileName).setVisible(true);
         this.dispose();
+    }//GEN-LAST:event_btnNewMedActionPerformed
+
+    private void btnAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAppointmentActionPerformed
+        new AppointmentCreate(CurrentID, FileName).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAppointmentActionPerformed
+
+    private void btnViewAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAppActionPerformed
+        new ViewAppointments(CurrentID, FileName).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnViewAppActionPerformed
+
+    private void btnNotMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotMedActionPerformed
+        new PrescribeMedication(CurrentID, FileName).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnNotMedActionPerformed
+
+    private void btnHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoryActionPerformed
+        new ViewPatientHistory(CurrentID, FileName).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnHistoryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,9 +222,8 @@ public class DashBoardDoctor extends javax.swing.JFrame {
     private javax.swing.JButton btnAppointment;
     private javax.swing.JButton btnHistory;
     private javax.swing.JButton btnLogOut;
-    private javax.swing.JButton btnNotes;
+    private javax.swing.JButton btnNewMed;
+    private javax.swing.JButton btnNotMed;
     private javax.swing.JButton btnViewApp;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton6;
     // End of variables declaration//GEN-END:variables
 }

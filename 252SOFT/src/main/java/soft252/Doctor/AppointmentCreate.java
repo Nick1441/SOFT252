@@ -5,19 +5,71 @@
  */
 package soft252.Doctor;
 
+import javax.swing.JOptionPane;
+import soft252.JSONSaving.SavingJSON;
+import soft252.Other.Appointment;
+import soft252.Other.Notify;
+import soft252.Patient.Patient;
+import soft252.System.SystemDatabase;
+
 /**
  *
  * @author Nick1
  */
 public class AppointmentCreate extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AppointmentCreate
-     */
-    public AppointmentCreate() {
+    
+    String Patient;
+    String Doctor;
+    public static String CurrentID;
+    public static String FileName;
+    public AppointmentCreate(String CurrentID, String FileName) {
         initComponents();
+        this.CurrentID = CurrentID;
+        this.FileName = FileName;
+        
+        LoadDocPat();
     }
 
+    public void UpdateInfo()
+    {
+       try
+        {
+            Patient = cmbPat.getSelectedItem().toString();
+            Doctor = cmbDoc.getSelectedItem().toString();
+
+            txtaInfoBack.setText("");
+            txtaInfoBack.append("Doctors Appointment.\n");
+            txtaInfoBack.append("For " + Patient + "\n");
+            txtaInfoBack.append("With " + Doctor + "\n");
+            txtaInfoBack.append("On " + txtDate.getText());
+        }
+        catch (Exception e)
+        {
+            System.out.println("NOT WORKED");   
+        }
+    }
+    
+    
+    public void LoadDocPat()
+    {
+        cmbPat.removeAllItems();
+        cmbDoc.removeAllItems();
+        
+        for (int i = 0; i < SystemDatabase.Users.size(); i++)
+        {
+            if (SystemDatabase.Users.get(i).getUserID().substring(0, 1).equals("P"))
+            {
+                String User = SystemDatabase.Users.get(i).getUserID();
+                cmbPat.addItem(User);
+            }
+            else if (SystemDatabase.Users.get(i).getUserID().substring(0, 1).equals("D"))
+            {
+                String Doc = SystemDatabase.Users.get(i).getUserID();
+                cmbDoc.addItem(Doc);
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,21 +79,159 @@ public class AppointmentCreate extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cmbPat = new javax.swing.JComboBox<>();
+        cmbDoc = new javax.swing.JComboBox<>();
+        btnSetDate = new javax.swing.JButton();
+        txtDate = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtaInfoBack = new javax.swing.JTextArea();
+        btnSave = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        cmbPat.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbPatItemStateChanged(evt);
+            }
+        });
+
+        cmbDoc.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbDocItemStateChanged(evt);
+            }
+        });
+
+        btnSetDate.setText("Set Date");
+        btnSetDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetDateActionPerformed(evt);
+            }
+        });
+
+        txtDate.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                txtDateInputMethodTextChanged(evt);
+            }
+        });
+        txtDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDateActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        txtaInfoBack.setEditable(false);
+        txtaInfoBack.setColumns(20);
+        txtaInfoBack.setRows(5);
+        jScrollPane2.setViewportView(txtaInfoBack);
+
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(95, 95, 95)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(4, 4, 4)
+                            .addComponent(cmbPat, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cmbDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnSetDate))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnSave)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnBack))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(95, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(39, 39, 39)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cmbPat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(18, 18, 18)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSetDate))
+                    .addGap(32, 32, 32)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSave)
+                        .addComponent(btnBack))
+                    .addContainerGap(43, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmbPatItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPatItemStateChanged
+        UpdateInfo();
+    }//GEN-LAST:event_cmbPatItemStateChanged
+
+    private void cmbDocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDocItemStateChanged
+        UpdateInfo();
+    }//GEN-LAST:event_cmbDocItemStateChanged
+
+    private void btnSetDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetDateActionPerformed
+        UpdateInfo();
+    }//GEN-LAST:event_btnSetDateActionPerformed
+
+    private void txtDateInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtDateInputMethodTextChanged
+
+    }//GEN-LAST:event_txtDateInputMethodTextChanged
+
+    private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDateActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+
+        Appointment NewApp = new Appointment(Doctor, Patient, txtDate.getText(), true);
+        SystemDatabase.Appointments.add(NewApp);
+
+        Notify PatNot = new Notify(Patient, "New Appointment Created. Check Appointments.");
+        SystemDatabase.Notifications.add(PatNot);
+
+        SavingJSON.Save(FileName);
+
+        JOptionPane.showMessageDialog(null, ("Appointment Created For " + Patient + "\nWith " + Doctor), "Notifications", JOptionPane.WARNING_MESSAGE);
+
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        new DashBoardDoctor(CurrentID, FileName).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -73,11 +263,19 @@ public class AppointmentCreate extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AppointmentCreate().setVisible(true);
+                new AppointmentCreate(CurrentID, FileName).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSetDate;
+    private javax.swing.JComboBox<String> cmbDoc;
+    private javax.swing.JComboBox<String> cmbPat;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField txtDate;
+    private javax.swing.JTextArea txtaInfoBack;
     // End of variables declaration//GEN-END:variables
 }
